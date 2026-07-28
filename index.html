@@ -418,16 +418,15 @@
     <header class="header">
       <div class="subtitle">✦ Asamblea Jerovia N°9 ✦</div>
       <h1>Estado de <span>Pagos</span></h1>
-      <!-- Cambio: nuevo tagline -->
-      <p class="tagline">Consulta tu estado de cuenta · <strong>Usuario único</strong> (sin acentos)</p>
+      <!-- Cambio: tagline más claro -->
+      <p class="tagline">Ingresá tu <strong>usuario</strong> (ej: <em>aoporto</em>) · Sin acentos ni mayúsculas</p>
     </header>
 
     <section class="search-section">
-      <p>🔍 Ingresá tu <strong>nombre de usuario</strong> (ej: <em>aoporto</em>)</p>
+      <p>🔍 Escribí tu nombre de usuario (columna <strong>user</strong> en la planilla)</p>
       <div class="search-box">
         <div class="input-wrapper">
           <input type="text" id="nombre" placeholder="Ej: aoporto" autocomplete="off" />
-          <!-- Cambio: ícono de corazón fijo o aleatorio (usaremos uno fijo, el corazón aleatorio va en el resultado) -->
           <span class="icon">❤️</span>
         </div>
         <button class="btn-consultar" id="btnBuscar">Consultar</button>
@@ -471,7 +470,7 @@
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
-        .trim();
+        .trim(); // eliminamos espacios alrededor
     }
 
     function limpiarNumero(valor) {
@@ -483,6 +482,7 @@
       return isNaN(num) ? 0 : num;
     }
 
+    // Parser CSV mejorado para manejar comillas y espacios
     function parseCSV(texto) {
       const filas = [];
       let filaActual = [];
@@ -508,11 +508,11 @@
           if (char === '"') {
             dentroComillas = true;
           } else if (char === ',') {
-            filaActual.push(campoActual);
+            filaActual.push(campoActual.trim());
             campoActual = "";
           } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
             if (char === '\r') i++;
-            filaActual.push(campoActual);
+            filaActual.push(campoActual.trim());
             filas.push(filaActual);
             filaActual = [];
             campoActual = "";
@@ -522,11 +522,12 @@
         }
       }
       if (campoActual !== "" || filaActual.length > 0) {
-        filaActual.push(campoActual);
+        filaActual.push(campoActual.trim());
         filas.push(filaActual);
       }
 
       if (filas.length === 0) return { headers: [], rows: [] };
+      // Convertir encabezados a minúsculas y recortar espacios
       const headers = filas[0].map(h => h.trim().toLowerCase());
       const rows = filas.slice(1);
       return { headers, rows };
@@ -538,35 +539,43 @@
         const respuesta = await fetch(urlCSV);
         if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
         const texto = await respuesta.text();
-        const { headers, rows } = parseCSV(texto);
+        console.log("CSV recibido (primeros 200 caracteres):", texto.substring(0, 200));
 
-        // Buscar columnas necesarias
+        const { headers, rows } = parseCSV(texto);
+        console.log("Encabezados detectados:", headers);
+
+        // Buscar columnas
         const idxNombre = headers.findIndex(h => h.includes('nombre'));
-        const idxUser = headers.findIndex(h => h.includes('user')); // nueva columna
+        const idxUser = headers.findIndex(h => h.includes('user'));
         const idxDeuda = headers.findIndex(h => h.includes('total deuda') || h.includes('total_deuda'));
         const idxUltimoMes = headers.findIndex(h => h.includes('último mes pagado') || h.includes('ultimo mes pagado'));
         const idxObs = headers.findIndex(h => h.includes('observaciones'));
 
         if (idxNombre === -1) throw new Error("No se encontró columna 'nombre'");
-        if (idxUser === -1) console.warn("No se encontró columna 'user' (se usará 'nombre' para búsqueda)");
+        if (idxUser === -1) {
+          console.warn("No se encontró columna 'user'. Se usará 'nombre' para búsqueda.");
+        } else {
+          console.log(`Columna 'user' encontrada en posición ${idxUser}. Primer valor: "${rows[0]?.[idxUser] || ''}"`);
+        }
 
         const datos = rows.map(row => ({
-          nombre: row[idxNombre] || '',
-          user: idxUser !== -1 ? (row[idxUser] || '') : '',
-          deuda: idxDeuda !== -1 ? (row[idxDeuda] || '0') : '0',
-          ultimoMes: idxUltimoMes !== -1 ? (row[idxUltimoMes] || '') : '',
-          observacion: idxObs !== -1 ? (row[idxObs] || '') : ''
+          nombre: (row[idxNombre] || '').trim(),
+          user: (idxUser !== -1 ? (row[idxUser] || '').trim() : ''),
+          deuda: (idxDeuda !== -1 ? (row[idxDeuda] || '0') : '0'),
+          ultimoMes: (idxUltimoMes !== -1 ? (row[idxUltimoMes] || '') : ''),
+          observacion: (idxObs !== -1 ? (row[idxObs] || '') : '')
         }));
 
+        console.log(`Se cargaron ${datos.length} registros. Ejemplo:`, datos[0]);
         return datos;
       } catch (error) {
-        console.error(error);
+        console.error("Error al cargar datos:", error);
         return null;
       }
     }
 
     // ---------- RENDER ----------
-    function renderResultado(hermana, corazon) {
+    function renderResultado(hermana, corazon, busquedaPorUser = true) {
       const div = document.getElementById('resultado');
 
       if (!hermana) {
@@ -575,6 +584,7 @@
             <div class="icono">🔎</div>
             <p>No encontramos a ninguna hermana con ese usuario.</p>
             <p style="font-size:0.9rem; margin-top:0.3rem;">Verificá que tu <strong>nombre de usuario</strong> esté bien escrito (sin acentos, todo minúscula).</p>
+            <p style="font-size:0.8rem; margin-top:0.2rem; color:#b8a4ae;">Búsqueda por ${busquedaPorUser ? 'columna user' : 'nombre'}</p>
           </div>
         `;
         return;
@@ -664,7 +674,6 @@
         return;
       }
 
-      // Normalizar el input (minúsculas, sin acentos)
       const inputNormalizado = normalizarTexto(textoIngresado);
 
       boton.disabled = true;
@@ -680,18 +689,18 @@
         return;
       }
 
-      // Buscar primero por "user" (si existe y coincide)
+      // Primero buscar por user
       let hermana = datos.find(h => normalizarTexto(h.user) === inputNormalizado);
+      let busquedaPorUser = true;
 
-      // Si no, buscar por "nombre" (fallback)
+      // Si no se encuentra, buscar por nombre (fallback)
       if (!hermana) {
         hermana = datos.find(h => normalizarTexto(h.nombre) === inputNormalizado);
+        busquedaPorUser = false;
       }
 
-      // Elegir corazón aleatorio
       const corazon = obtenerCorazonAleatorio();
-
-      renderResultado(hermana, corazon);
+      renderResultado(hermana, corazon, busquedaPorUser);
 
       boton.disabled = false;
       boton.textContent = 'Consultar';
