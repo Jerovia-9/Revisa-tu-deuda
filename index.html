@@ -9,13 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ---------- Reset & base ---------- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Montserrat', sans-serif;
       background: linear-gradient(145deg, #fdf6f9 0%, #fff0f5 100%);
@@ -27,8 +25,6 @@
       padding: 2rem 1.5rem;
       color: #2d2d2d;
     }
-
-    /* ---------- Arcoíris animado (borde superior) ---------- */
     .rainbow-bar {
       width: 100%;
       max-width: 820px;
@@ -41,13 +37,10 @@
       margin: 0 auto 0 auto;
       box-shadow: 0 4px 20px rgba(216, 48, 59, 0.2);
     }
-
     @keyframes arcoirisMove {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
-
-    /* ---------- Contenedor principal ---------- */
     .container {
       max-width: 820px;
       width: 100%;
@@ -58,16 +51,12 @@
       box-shadow: 0 30px 60px -20px rgba(214, 51, 132, 0.25),
                   0 10px 30px -10px rgba(0,0,0,0.05);
       padding: 2.5rem 2.5rem 2rem;
-      transition: all 0.3s ease;
       border: 1px solid rgba(255, 255, 255, 0.5);
     }
-
-    /* ---------- Encabezado ---------- */
     .header {
       text-align: center;
       margin-bottom: 2.5rem;
     }
-
     .header .subtitle {
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
@@ -81,7 +70,6 @@
       border-radius: 50px;
       margin-bottom: 0.75rem;
     }
-
     .header h1 {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
@@ -90,14 +78,12 @@
       line-height: 1.1;
       margin-bottom: 0.3rem;
     }
-
     .header h1 span {
       background: linear-gradient(135deg, #d63384, #b82a6e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
     .header .tagline {
       font-family: 'Montserrat', sans-serif;
       font-weight: 300;
@@ -106,13 +92,10 @@
       letter-spacing: 0.5px;
       margin-top: 0.25rem;
     }
-
     .header .tagline strong {
       font-weight: 600;
       color: #d63384;
     }
-
-    /* ---------- Buscador ---------- */
     .search-section {
       background: rgba(255, 255, 255, 0.5);
       border-radius: 30px;
@@ -120,14 +103,12 @@
       margin-bottom: 2rem;
       box-shadow: inset 0 1px 4px rgba(255,255,255,0.8), 0 8px 20px rgba(214,51,132,0.06);
     }
-
     .search-section p {
       font-size: 0.95rem;
       font-weight: 400;
       color: #5a4a52;
       margin-bottom: 1.2rem;
     }
-
     .search-box {
       display: flex;
       flex-wrap: wrap;
@@ -135,12 +116,10 @@
       align-items: center;
       justify-content: center;
     }
-
     .input-wrapper {
       flex: 1 1 280px;
       position: relative;
     }
-
     .input-wrapper input {
       width: 100%;
       padding: 0.9rem 1.2rem 0.9rem 3rem;
@@ -154,12 +133,10 @@
       color: #2d2d2d;
       box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
-
     .input-wrapper input:focus {
       border-color: #d63384;
       box-shadow: 0 0 0 6px rgba(214, 51, 132, 0.08), 0 4px 12px rgba(214,51,132,0.1);
     }
-
     .input-wrapper .icon {
       position: absolute;
       left: 1.2rem;
@@ -170,12 +147,10 @@
       pointer-events: none;
       transition: opacity 0.3s;
     }
-
     .input-wrapper input:focus + .icon,
     .input-wrapper input:focus ~ .icon {
       opacity: 0.8;
     }
-
     .btn-consultar {
       background: linear-gradient(135deg, #d63384, #b82a6e);
       color: white;
@@ -194,29 +169,23 @@
       gap: 0.5rem;
       white-space: nowrap;
     }
-
     .btn-consultar:hover {
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 14px 30px rgba(214, 51, 132, 0.4);
     }
-
     .btn-consultar:active {
       transform: scale(0.96);
     }
-
     .btn-consultar:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
     }
-
-    /* ---------- Resultados ---------- */
     #resultado {
       margin-top: 0.5rem;
       min-height: 100px;
       transition: all 0.4s ease;
     }
-
     .result-card {
       background: white;
       border-radius: 28px;
@@ -226,12 +195,10 @@
       animation: fadeSlideUp 0.5s ease forwards;
       text-align: left;
     }
-
     @keyframes fadeSlideUp {
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
-
     .result-header {
       display: flex;
       align-items: center;
@@ -240,7 +207,6 @@
       border-bottom: 1px solid #f5e8ee;
       padding-bottom: 1.2rem;
     }
-
     .result-header .avatar {
       width: 56px;
       height: 56px;
@@ -254,11 +220,9 @@
       flex-shrink: 0;
       box-shadow: 0 4px 12px rgba(214,51,132,0.1);
     }
-
     .result-header .name-group {
       flex: 1;
     }
-
     .result-header .name-group .nombre {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
@@ -266,7 +230,6 @@
       color: #1a1a1a;
       line-height: 1.1;
     }
-
     .result-header .name-group .label {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -274,7 +237,6 @@
       color: #a08a94;
       font-weight: 500;
     }
-
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -288,30 +250,25 @@
       background: #e8f5e9;
       color: #2e7d32;
     }
-
     .status-badge.warning {
       background: #fff3e0;
       color: #e65100;
     }
-
     .status-badge.danger {
       background: #ffebee;
       color: #c62828;
     }
-
     .result-body {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.2rem;
       margin-top: 0.5rem;
     }
-
     .result-body .item {
       background: #faf5f8;
       border-radius: 18px;
       padding: 0.8rem 1.2rem;
     }
-
     .result-body .item .label {
       font-size: 0.65rem;
       text-transform: uppercase;
@@ -319,7 +276,6 @@
       color: #a08a94;
       font-weight: 500;
     }
-
     .result-body .item .value {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
@@ -327,16 +283,13 @@
       color: #1a1a1a;
       margin-top: 0.15rem;
     }
-
     .result-body .item .value.deuda {
       color: #d63384;
     }
-
     .result-body .item .value.mes {
       color: #4a4a4a;
       font-weight: 400;
     }
-
     .alert-box {
       margin-top: 1.5rem;
       padding: 1rem 1.4rem;
@@ -351,11 +304,9 @@
       font-size: 0.95rem;
       box-shadow: inset 0 1px 4px rgba(214,51,132,0.04);
     }
-
     .alert-box .icono {
       font-size: 1.6rem;
     }
-
     .no-result {
       background: white;
       border-radius: 28px;
@@ -365,24 +316,19 @@
       border: 1px dashed #e0cdd6;
       animation: fadeSlideUp 0.4s ease forwards;
     }
-
     .no-result .icono {
       font-size: 3rem;
       margin-bottom: 0.5rem;
       opacity: 0.6;
     }
-
     .no-result p {
       color: #7a6a72;
       font-size: 1rem;
     }
-
     .no-result p strong {
       color: #d63384;
       font-weight: 600;
     }
-
-    /* ---------- Spinner ---------- */
     .spinner {
       display: inline-block;
       width: 40px;
@@ -393,11 +339,9 @@
       animation: spin 0.8s linear infinite;
       margin: 0.5rem auto;
     }
-
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-
     .loading-text {
       display: flex;
       flex-direction: column;
@@ -406,8 +350,6 @@
       color: #7a6a72;
       font-size: 0.95rem;
     }
-
-    /* ---------- Footer ---------- */
     .footer {
       max-width: 820px;
       width: 100%;
@@ -420,26 +362,21 @@
       border-top: 1px solid rgba(214, 51, 132, 0.08);
       padding-top: 1.8rem;
     }
-
     .footer .rainbow-dots {
       display: inline-flex;
       gap: 6px;
       margin-bottom: 0.5rem;
     }
-
     .footer .rainbow-dots span {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       display: inline-block;
     }
-
     .footer strong {
       color: #d63384;
       font-weight: 500;
     }
-
-    /* ---------- Responsive ---------- */
     @media (max-width: 640px) {
       .container {
         padding: 1.5rem 1.2rem;
@@ -474,37 +411,33 @@
 </head>
 <body>
 
-  <!-- Borde arcoíris animado -->
   <div class="rainbow-bar"></div>
 
-  <!-- Contenedor principal -->
   <div class="container">
 
-    <!-- Encabezado -->
     <header class="header">
       <div class="subtitle">✦ Asamblea Jerovia N°9 ✦</div>
       <h1>Estado de <span>Pagos</span></h1>
-      <p class="tagline">Consulta tu situación · <strong>Fe</strong> y <strong>comunidad</strong></p>
+      <!-- Cambio: nuevo tagline -->
+      <p class="tagline">Consulta tu estado de cuenta · <strong>Usuario único</strong> (sin acentos)</p>
     </header>
 
-    <!-- Buscador -->
     <section class="search-section">
-      <p>🔍 Ingresá tu nombre <strong>exactamente</strong> como figura en la planilla</p>
+      <p>🔍 Ingresá tu <strong>nombre de usuario</strong> (ej: <em>aoporto</em>)</p>
       <div class="search-box">
         <div class="input-wrapper">
-          <input type="text" id="nombre" placeholder="Ej: Ana María López" autocomplete="off" />
-          <span class="icon">👤</span>
+          <input type="text" id="nombre" placeholder="Ej: aoporto" autocomplete="off" />
+          <!-- Cambio: ícono de corazón fijo o aleatorio (usaremos uno fijo, el corazón aleatorio va en el resultado) -->
+          <span class="icon">❤️</span>
         </div>
         <button class="btn-consultar" id="btnBuscar">Consultar</button>
       </div>
     </section>
 
-    <!-- Resultado -->
     <div id="resultado"></div>
 
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="rainbow-dots">
       <span style="background:#D8303B;"></span>
@@ -523,7 +456,14 @@
 
   <script>
     // ---------- CONFIGURACIÓN ----------
-    const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQxE2Bne2Sg_YiMpskNCD0Ke1ac_tEDF-Ul86ScA3tx_gVZS6R6CowMsTlNJ3_VrXRKc9sLTkwi5sw4/pub?gid=0&single=true&output=csv";
+    // Reemplaza esta URL con la de tu CSV publicado
+    const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQoODpv83IyGi4ofwV8Zi55B_yA2kCW8OADfnOSLyWa9ihiwqFzd-49YDO9WFDIxn_fUhtx67H28510/pub?gid=0&single=true&output=csv";
+
+    // ---------- CORAZONES ALEATORIOS ----------
+    const corazones = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '🤎', '💖', '💗', '💘', '💝'];
+    function obtenerCorazonAleatorio() {
+      return corazones[Math.floor(Math.random() * corazones.length)];
+    }
 
     // ---------- UTILIDADES ----------
     function normalizarTexto(texto) {
@@ -600,15 +540,19 @@
         const texto = await respuesta.text();
         const { headers, rows } = parseCSV(texto);
 
+        // Buscar columnas necesarias
         const idxNombre = headers.findIndex(h => h.includes('nombre'));
+        const idxUser = headers.findIndex(h => h.includes('user')); // nueva columna
         const idxDeuda = headers.findIndex(h => h.includes('total deuda') || h.includes('total_deuda'));
         const idxUltimoMes = headers.findIndex(h => h.includes('último mes pagado') || h.includes('ultimo mes pagado'));
         const idxObs = headers.findIndex(h => h.includes('observaciones'));
 
         if (idxNombre === -1) throw new Error("No se encontró columna 'nombre'");
+        if (idxUser === -1) console.warn("No se encontró columna 'user' (se usará 'nombre' para búsqueda)");
 
         const datos = rows.map(row => ({
           nombre: row[idxNombre] || '',
+          user: idxUser !== -1 ? (row[idxUser] || '') : '',
           deuda: idxDeuda !== -1 ? (row[idxDeuda] || '0') : '0',
           ultimoMes: idxUltimoMes !== -1 ? (row[idxUltimoMes] || '') : '',
           observacion: idxObs !== -1 ? (row[idxObs] || '') : ''
@@ -622,15 +566,15 @@
     }
 
     // ---------- RENDER ----------
-    function renderResultado(hermana) {
+    function renderResultado(hermana, corazon) {
       const div = document.getElementById('resultado');
 
       if (!hermana) {
         div.innerHTML = `
           <div class="no-result">
             <div class="icono">🔎</div>
-            <p>No encontramos a ninguna hermana con ese nombre.</p>
-            <p style="font-size:0.9rem; margin-top:0.3rem;">Verificá que esté escrito <strong>exactamente</strong> como figura en la planilla (mayúsculas, tildes, espacios).</p>
+            <p>No encontramos a ninguna hermana con ese usuario.</p>
+            <p style="font-size:0.9rem; margin-top:0.3rem;">Verificá que tu <strong>nombre de usuario</strong> esté bien escrito (sin acentos, todo minúscula).</p>
           </div>
         `;
         return;
@@ -649,7 +593,6 @@
         badgeText = '⏳ Pendiente';
       }
 
-      // Mensaje de advertencia si deuda > 500000
       let alertHTML = '';
       if (deudaNum > 500000) {
         alertHTML = `
@@ -663,7 +606,7 @@
       div.innerHTML = `
         <div class="result-card">
           <div class="result-header">
-            <div class="avatar">👑</div>
+            <div class="avatar">${corazon}</div>
             <div class="name-group">
               <div class="nombre">${hermana.nombre}</div>
               <div class="label">Hermana de la Asamblea</div>
@@ -708,20 +651,22 @@
     // ---------- LÓGICA PRINCIPAL ----------
     async function buscar() {
       const input = document.getElementById('nombre');
-      const nombreIngresado = normalizarTexto(input.value);
+      const textoIngresado = input.value.trim();
       const boton = document.getElementById('btnBuscar');
 
-      if (!nombreIngresado) {
+      if (!textoIngresado) {
         document.getElementById('resultado').innerHTML = `
           <div class="no-result">
             <div class="icono">✏️</div>
-            <p>Por favor, escribí un nombre para consultar.</p>
+            <p>Por favor, escribí tu nombre de usuario.</p>
           </div>
         `;
         return;
       }
 
-      // Deshabilitar botón y mostrar spinner
+      // Normalizar el input (minúsculas, sin acentos)
+      const inputNormalizado = normalizarTexto(textoIngresado);
+
       boton.disabled = true;
       boton.textContent = 'Consultando...';
       mostrarLoading();
@@ -735,15 +680,24 @@
         return;
       }
 
-      const hermana = datos.find(h => normalizarTexto(h.nombre) === nombreIngresado);
+      // Buscar primero por "user" (si existe y coincide)
+      let hermana = datos.find(h => normalizarTexto(h.user) === inputNormalizado);
 
-      renderResultado(hermana);
+      // Si no, buscar por "nombre" (fallback)
+      if (!hermana) {
+        hermana = datos.find(h => normalizarTexto(h.nombre) === inputNormalizado);
+      }
+
+      // Elegir corazón aleatorio
+      const corazon = obtenerCorazonAleatorio();
+
+      renderResultado(hermana, corazon);
 
       boton.disabled = false;
       boton.textContent = 'Consultar';
     }
 
-    // ---------- EVENTOS -----G-----
+    // ---------- EVENTOS ----------
     document.getElementById('btnBuscar').addEventListener('click', buscar);
 
     document.getElementById('nombre').addEventListener('keydown', (e) => {
@@ -753,11 +707,10 @@
       }
     });
 
-    // Carga inicial (opcional: mostrar mensaje amigable)
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('resultado').innerHTML = `
         <div class="no-result" style="border-color:transparent; background:transparent; box-shadow:none; padding:0.5rem;">
-          <p style="color:#b8a4ae; font-size:0.9rem;">✨ Ingresá tu nombre y presioná "Consultar"</p>
+          <p style="color:#b8a4ae; font-size:0.9rem;">✨ Ingresá tu usuario y presioná "Consultar"</p>
         </div>
       `;
     });
